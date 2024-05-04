@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "848876245312",
+    "firebase_url": "https://farmiculture-57e37-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "farmiculture-57e37",
+    "storage_bucket": "farmiculture-57e37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848876245312:android:abe3fc818c09ea27006aa5",
+        "android_client_info": {
+          "package_name": "com.sujitgyawali.farmi_culture"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZtH0dvUzKW4kDoWy3lbh6A_4GIRh2Xj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
