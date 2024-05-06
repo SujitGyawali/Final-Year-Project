@@ -101,7 +101,7 @@ class AboutUsContent extends StatelessWidget {
                 Image.asset(
                   'assets/Photo.jpg',
                   width: 90.0,
-                  height: 90.0,
+                 height: 90.0,
                 ),
                 SizedBox(width: 20.0),
                 Expanded(
