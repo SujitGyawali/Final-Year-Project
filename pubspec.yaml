@@ -34,14 +34,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   youtube_player_flutter:
-  http: ^1.2.1
+  http: ^0.13.6
   firebase_core: ^2.30.1
   cloud_firestore: ^4.17.0
   email_validator: ^2.0.1
   firebase_database: ^10.5.4
   csv: ^5.0.1
-#  awesome_notifications: ^0.9.3+1
   flutter_local_notifications: ^9.0.2
+  dialog_flowtter: ^0.3.0
+
 
 dev_dependencies:
   flutter_test:
@@ -68,10 +69,32 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   # assets:
   assets:
-    - assets/predictions.csv
     - assets/FarmiCulture.png
     - assets/Photo.jpg
     - assets/warning.webp
+    - assets/dialog_flow_auth.json
+    - assets/apple.jpeg
+    - assets/banana.jpeg
+    - assets/blackgram.jpeg
+    - assets/chickpea.jpeg
+    - assets/coconut.jpeg
+    - assets/coffee.jpeg
+    - assets/cotton.jpeg
+    - assets/grapes.jpeg
+    - assets/jute.jpeg
+    - assets/kidneybeans.jpeg
+    - assets/lentil.jpeg
+    - assets/maize.jpeg
+    - assets/mango.jpeg
+    - assets/mothbeans.jpeg
+    - assets/mungbean.jpeg
+    - assets/muskmelon.jpeg
+    - assets/orange.jpeg
+    - assets/papaya.jpeg
+    - assets/pigeonpeas.jpeg
+    - assets/pomegranate.jpeg
+    - assets/rice.jpeg
+    - assets/watermelon.jpeg
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

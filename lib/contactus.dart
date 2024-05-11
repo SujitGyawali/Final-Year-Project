@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farmi_culture/aboutus.dart';
+import 'package:farmi_culture/chatbot.dart';
 import 'package:farmi_culture/education.dart';
 import 'package:farmi_culture/home.dart';
 import 'package:farmi_culture/support.dart';
@@ -208,6 +209,11 @@ class _ContactUsPageState extends State<ContactUsPage> {
               MaterialPageRoute(
                   builder: (context) => EducationalResourcePage()),
             );
+          }else if (index == 5) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChatBot()),
+            );
           }
         },
         items: const <BottomNavigationBarItem>[
@@ -217,7 +223,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
-            label: 'Info',
+            label: 'Support',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -225,11 +231,15 @@ class _ContactUsPageState extends State<ContactUsPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),
-            label: 'Support',
+            label: 'Contact Us',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'Education',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'ChatBot',
           ),
         ],
       ),

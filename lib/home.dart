@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:farmi_culture/chatbot.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,8 +10,8 @@ import 'package:farmi_culture/contactus.dart';
 import 'package:farmi_culture/education.dart';
 import 'package:farmi_culture/support.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;  // Importing http package
-import 'dart:convert';  // Importing JSON package for encoding/decoding
+import 'package:http/http.dart' as http; // Importing http package
+import 'dart:convert'; // Importing JSON package for encoding/decoding
 
 class HomePage extends StatefulWidget {
   @override
@@ -33,9 +34,10 @@ class _HomePageState extends State<HomePage> {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final InitializationSettings initializationSettings = InitializationSettings(
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
       android: initializationSettingsAndroid,
     );
 
@@ -47,19 +49,19 @@ class _HomePageState extends State<HomePage> {
     );
 
     // Request notification permission (if required by some devices)
-    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.requestPermission();
   }
 
   Future<void> _sendNotification(String crop) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
-    AndroidNotificationDetails(
-        'crop_prediction', 'Crop Prediction',
-        channelDescription: 'Channel for Crop Prediction Notifications',
-        importance: Importance.max,
-        priority: Priority.high,
-        showWhen: false);
+        AndroidNotificationDetails('crop_prediction', 'Crop Prediction',
+            channelDescription: 'Channel for Crop Prediction Notifications',
+            importance: Importance.max,
+            priority: Priority.high,
+            showWhen: false);
 
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
@@ -78,14 +80,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _initializeFirebase() async {
-    if (Firebase.apps.isEmpty) { // Ensure Firebase is initialized only once
+    if (Firebase.apps.isEmpty) {
+      // Ensure Firebase is initialized only once
       await Firebase.initializeApp(
         options: FirebaseOptions(
           apiKey: 'AIzaSyCZtH0dvUzKW4kDoWy3lbh6A_4GIRh2Xj4',
           projectId: 'farmiculture-57e37',
           messagingSenderId: '848876245312',
           appId: '1:848876245312:android:abe3fc818c09ea27006aa5',
-          databaseURL: 'https://farmiculture-57e37-default-rtdb.asia-southeast1.firebasedatabase.app',
+          databaseURL:
+              'https://farmiculture-57e37-default-rtdb.asia-southeast1.firebasedatabase.app',
         ),
       );
     }
@@ -96,10 +100,7 @@ class _HomePageState extends State<HomePage> {
 
 // Modify the getSensorDataStream method to capture the latest sensor data
   Stream<Map<String, dynamic>> getSensorDataStream() {
-    return _databaseRef
-        .child('sensorData')
-        .onValue
-        .map((event) {
+    return _databaseRef.child('sensorData').onValue.map((event) {
       final data = event.snapshot.value as Map<dynamic, dynamic>;
       Map<String, dynamic> latestData = {};
 
@@ -107,11 +108,9 @@ class _HomePageState extends State<HomePage> {
         var sortedEntries = data.entries.toList()
           ..sort((a, b) {
             var aTime = DateTime.parse(
-                '${DateTime.now().toIso8601String().split("T")[0]}T${a
-                    .value["fields"]["timestamp"]}');
+                '${DateTime.now().toIso8601String().split("T")[0]}T${a.value["fields"]["timestamp"]}');
             var bTime = DateTime.parse(
-                '${DateTime.now().toIso8601String().split("T")[0]}T${b
-                    .value["fields"]["timestamp"]}');
+                '${DateTime.now().toIso8601String().split("T")[0]}T${b.value["fields"]["timestamp"]}');
             return bTime.compareTo(aTime);
           });
 
@@ -133,9 +132,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
   // Method to load CSV from assets and update the crop suggestion
-  Future<void> _loadCSV(String temperature, String humidity, String soilMoisture) async {
+  Future<void> _loadCSV(
+      String temperature, String humidity, String soilMoisture) async {
     String apiLink = "192.168.1.71:8000";
     final client = http.Client();
     var result = "";
@@ -150,23 +149,14 @@ class _HomePageState extends State<HomePage> {
       });
       final data = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        // _allData = data["content"];
-        // _cat = data['title'];
-        // hasLoadedData = true;
-        // notifyListeners();
         result = data["category"];
       }
-    }
-    on SocketException catch (e) {
+    } on SocketException catch (e) {
       // Handle SocketException
       print(e.message);
-
-
     } on http.ClientException catch (e) {
       // Handle http.ClientException
       // print("error");
-
-
     } finally {
       client.close(); //// Close the client when done
     }
@@ -185,115 +175,132 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color(0xFFE4F8E7),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(height: 40.0),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              decoration: BoxDecoration(
-                color: Color(0xFF598C00),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    'Welcome Users',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 40.0),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                decoration: BoxDecoration(
+                  color: Color(0xFF598C00),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Welcome Users',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5.0),
-                  Text(
-                    'To the IoT Project',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.white,
+                    SizedBox(height: 5.0),
+                    Text(
+                      'To the IoT Project',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 10.0),
-            StreamBuilder<Map<String, dynamic>>(
-              stream: getSensorDataStream(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (snapshot.hasData) {
-                  var data = snapshot.data;
+              SizedBox(height: 10.0),
+              StreamBuilder<Map<String, dynamic>>(
+                stream: getSensorDataStream(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (snapshot.hasData) {
+                    var data = snapshot.data;
 
-                  return GridView.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 20.0,
-                    shrinkWrap: true,
-                    children: [
-                      _buildInfoCard('Temperature', '${data?['temperature']}°C',
-                          Color(0xFF598C00)),
-                      _buildInfoCard('Humidity', '${data?['humidity']}',
-                          Color(0xFF598C00)),
-                      _buildInfoCard(
-                          'Soil Moisture', '${data?['soilMoisture']}',
-                          Color(0xFF598C00)),
-                      _buildButtonCard(
-                          'Action', 'Predict \n  Crop', Color(0xFF598C00), ()
-                      {
-                        _loadCSV(data!['temperature'].toString(), data!['humidity'].toString(),
-                            data!['soilMoisture'].toString());
-                      })
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     final features = [25.0, 60.0, 40.0];  // Example data
-                      //     predictCrop(features, updateCropSuggestion);  // Call predictCrop and pass the update function
-                      //   },
-                      //   child: Text('Predict Crop $cropSuggestion'),
-                      // ),
-                    ],
-                  );
-                } else {
-                  return Center(child: Text('No data available.'));
-                }
-              },
-            ),
-            SizedBox(height: 20.0),
-            Container(
-              height: 130.0,
-              decoration: BoxDecoration(
-                color: Color(0xFFEEEEEE),
-                borderRadius: BorderRadius.circular(10.0),
+                    return Column(
+                      children: [
+                        GridView.count(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 20.0,
+                          shrinkWrap: true,
+                          children: [
+                            _buildInfoCard('Temperature',
+                                '${data?['temperature']}°C', Color(0xFF598C00)),
+                            _buildInfoCard('Humidity', '${data?['humidity']}',
+                                Color(0xFF598C00)),
+                            _buildInfoCard('Soil Moisture',
+                                '${data?['soilMoisture']}', Color(0xFF598C00)),
+                            _buildInfoCard('Water Level',
+                                '${data?['soilMoisture']}', Color(0xFF598C00)),
+                          ],
+                        ),
+                        SizedBox(
+                            height: 10), // Add some space below the GridView
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _loadCSV(
+                                  data!['temperature'].toString(),
+                                  data!['humidity'].toString(),
+                                  data!['soilMoisture'].toString());
+                            },
+                            child: Text('Submit'),
+                          ),
+                        ),
+                        SizedBox(
+                            height:
+                                10), // Add some space below the submit button
+                      ],
+                    );
+                  } else {
+                    return Center(child: Text('No data available.'));
+                  }
+                },
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Best Crop For This Soil Type',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              SizedBox(height: 20.0),
+              Container(
+                height: 200.0,
+                decoration: BoxDecoration(
+                  color: Color(0xFFEEEEEE),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Best Crop For This Soil Type',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5.0),
-                  Text(
-                    '$cropSuggestion',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.black,
+                    SizedBox(height: 5.0),
+                    Text(
+                      '$cropSuggestion',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 10.0),
+                    cropSuggestion != '--'
+                        ? Expanded(
+                            child: Image.asset(
+                              'assets/${cropSuggestion.toLowerCase()}.jpeg',
+                              fit: BoxFit.contain,
+                            ),
+                          )
+                        : SizedBox(),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: SizedBox(),
-            ),
-          ],
+              SizedBox(height: 20.0),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -329,6 +336,12 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) => EducationalResourcePage()),
               );
               break;
+            case 5:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChatBot()),
+              );
+              break;
           }
         },
         items: const [
@@ -338,7 +351,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
-            label: 'Info',
+            label: 'Support',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -352,13 +365,17 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.school),
             label: 'Education',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'ChatBot',
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildButtonCard(String title, String buttonLabel, Color color,
-      VoidCallback onPressed) {
+  Widget _buildButtonCard(
+      String title, String buttonLabel, Color color, VoidCallback onPressed) {
     return Container(
       decoration: BoxDecoration(
         color: color,

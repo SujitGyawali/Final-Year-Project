@@ -1,3 +1,4 @@
+import 'package:farmi_culture/chatbot.dart';
 import 'package:farmi_culture/contactus.dart';
 import 'package:farmi_culture/home.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +89,12 @@ class EducationalResourcePage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => ContactUsPage()),
             );
           }
+          else if (index == 5) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChatBot()),
+            );
+          }
           // Handle navigation for other items if needed
         },
         items: const <BottomNavigationBarItem>[
@@ -97,7 +104,7 @@ class EducationalResourcePage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
-            label: 'Info',
+            label: 'Support',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -105,11 +112,15 @@ class EducationalResourcePage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),
-            label: 'Support',
+            label: 'Contact Us',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'Education',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'ChatBot',
           ),
         ],
       ),

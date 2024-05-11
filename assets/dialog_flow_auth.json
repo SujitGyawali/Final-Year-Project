@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "farmicultureflutterbot-hwxd",
+  "private_key_id": "cec77b1e2ffb9569c03fe1ce83931748b8ef32c2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCrTnd/aLu6ANh2\nXqLH/i48ztVSzx/YAOLoGYoxKKaWEkjnKFkzFRvnqPCz6Gm7rmTSV0u5DL5sog/d\n4L1ujPKrleunbKbhtTGs1tAxkYBTPJsybNPot9qNUpXYdogYbmKGQXRuxHHWy21j\nuFeMCSzNfy9IsXIv5Klv9vtEFolQy3g2Ax2Nl9czej2BFKLARC/sra+1VxIqWKj5\nbvuX8PNKNIKQOw+lNxOiTYQfnkwVlJ4tFeZXtv42IFY5LPsSiR5eJr5bPhldeRFS\nY3CG7vRhZczgRSjpnNegll13Lwu13rTpjXFptHKZYPtxXYmYPLN276NtfMDBOSXE\nTI3euBarAgMBAAECggEAFF1kqVnbD1awZQoFEf9uob348Do9T+FzGCKJIiTyAN81\nmX1bdU4qHhUgYFLd1vj5dWP5VYtlS+bMOhVQj8bjxnAxLpslD6oJuMFkyK/CcKLA\n1HLJkl3g9nH97FjS/wyIW+uGGvDxk5Zlb7hnd/dTQy6+gUbPC1CEsBHNdx+yvU7x\nID/t/oRH6aEHD0VLUKRIV4+lvLfyqsP7Pqipbk8rjJqYYRxcbNGPprwzAvtk9/7t\nkJsgi6wGZQrwu44A59XclipxXMuO3rs95uWnS74Z12W1xc8a5JVWqGtZWbTpcsd6\nnfLtRvGh0M2t58YpcUmH6we6+nGVw8oyJGLusc4GUQKBgQDeBVz+Iw24uXP/EyBh\nclCqTAaePkUm/S9CPAHCfyLYi5YJKGy5zYUuhg8J+4DaEvQ9SYYW+jChoStNFvai\nhli33OflLe/X0xkhm8pakil8QzYMBJrlYUKSQOp59EhYl64MFYZjUxozZ87jJCol\nwNkAzVsLuOERFNLWot5JdWgCIwKBgQDFhiUL+2+nZpL8mrIXgrwwXXUdFcDxXPt3\nBEXB0l6nQTGU+74//F2ILU1vntPxUucrgmBsVi29gxI4qdxMdgRsBjCSB9mFYjfU\nCrrscWPtHEM7mZ+pCuQ8UBA+9FpKYBtBcQpEifiwm0r3S/uW2xIJuARPm7+oyzB0\n1TrGgauN2QKBgEHCTufK1B6ZdzzemmGibTfzaqZmBS9mICA7C75iz5xZw6eUvJdP\nwxmjhULMpj5xDLw2UavukIbe6KddnNFIf3B90oVz1K0VDkWBEi8/SWBPu+tVVdeI\ntiIBbjGO4/qxelCD85jpnUIKhiGKrZ0fAGcXa9cN/EOF6mi+Np6FUrgHAoGALN/a\nAMvhxO1HzX2zoiXAbVh+J9puWCdgtdxRoMQTXvovsoIy6cSC11I7enVh/zxvanIX\nR+WYRKrHc/obI3/YZ1ZMqJCB+Yyj1FePufHU2uSF3b98B2KDEbS6zCKldKo65vYw\nd/vEdRMCyAYKJW6lvXGCATgIJefrnU9oJ/sDp5kCgYAcsjqsgGVeH/A0Zsyo6iA2\njQGG5X1uvpmpwln+qAW3rtsqKgVr5+A3Uv3AW2rQfEgfrIPgGcxhobsVPySRRl+3\nSHVHUn3L49O5dRqoiyGL17GvxNlem8d3fVXEif7CQBRXbjRryopZcWS94qbeb7bq\nTUK/EAblEAYRPUfibP6mIA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "farmiculturebot@farmicultureflutterbot-hwxd.iam.gserviceaccount.com",
+  "client_id": "104775019038523472338",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/farmiculturebot%40farmicultureflutterbot-hwxd.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
