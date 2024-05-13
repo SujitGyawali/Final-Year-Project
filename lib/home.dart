@@ -5,7 +5,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:farmi_culture/aboutus.dart';
 import 'package:farmi_culture/contactus.dart';
 import 'package:farmi_culture/education.dart';
 import 'package:farmi_culture/support.dart';
@@ -81,7 +80,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _initializeFirebase() async {
     if (Firebase.apps.isEmpty) {
-      // Ensure Firebase is initialized only once
+      //Ensuring Firebase initialization
       await Firebase.initializeApp(
         options: FirebaseOptions(
           apiKey: 'AIzaSyCZtH0dvUzKW4kDoWy3lbh6A_4GIRh2Xj4',
@@ -119,10 +118,12 @@ class _HomePageState extends State<HomePage> {
         latestData['temperature'] = newestEntry['temperature'];
         latestData['humidity'] = newestEntry['humidity'];
         latestData['soilMoisture'] = newestEntry['soilMoisture'];
+        latestData['waterLevel'] = newestEntry['waterLevel'];
       } else {
         latestData['temperature'] = 'N/A';
         latestData['humidity'] = 'N/A';
         latestData['soilMoisture'] = 'N/A';
+        latestData['waterLevel'] = 'N/A';
       }
 
       // Update the latest sensor data variable
@@ -138,10 +139,8 @@ class _HomePageState extends State<HomePage> {
     String apiLink = "192.168.1.71:8000";
     final client = http.Client();
     var result = "";
-    // setLoading(true);
     try {
       var url = Uri.http(apiLink, 'predict/');
-      // print(id);
       var response = await http.post(url, body: {
         "temperature": temperature,
         "humidity": humidity,
@@ -156,7 +155,6 @@ class _HomePageState extends State<HomePage> {
       print(e.message);
     } on http.ClientException catch (e) {
       // Handle http.ClientException
-      // print("error");
     } finally {
       client.close(); //// Close the client when done
     }
@@ -217,7 +215,6 @@ class _HomePageState extends State<HomePage> {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (snapshot.hasData) {
                     var data = snapshot.data;
-
                     return Column(
                       children: [
                         GridView.count(
@@ -233,11 +230,12 @@ class _HomePageState extends State<HomePage> {
                             _buildInfoCard('Soil Moisture',
                                 '${data?['soilMoisture']}', Color(0xFF598C00)),
                             _buildInfoCard('Water Level',
-                                '${data?['soilMoisture']}', Color(0xFF598C00)),
+                                '${data?['waterLevel']}', Color(0xFF598C00)),
                           ],
                         ),
                         SizedBox(
-                            height: 10), // Add some space below the GridView
+                          // Add some space below the GridView
+                            height: 30),
                         Center(
                           child: ElevatedButton(
                             onPressed: () {
@@ -246,12 +244,17 @@ class _HomePageState extends State<HomePage> {
                                   data!['humidity'].toString(),
                                   data!['soilMoisture'].toString());
                             },
-                            child: Text('Submit'),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0), // Adjust the padding
+                            ),
+                            child: Text('Predict Crop',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),),
                           ),
                         ),
                         SizedBox(
-                            height:
-                                10), // Add some space below the submit button
+                            height:10), // Add some space below the submit button
                       ],
                     );
                   } else {
@@ -314,29 +317,23 @@ class _HomePageState extends State<HomePage> {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutUsPage()),
+                MaterialPageRoute(builder: (context) => SupportPage()),
               );
               break;
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SupportPage()),
-              );
-              break;
-            case 3:
-              Navigator.push(
-                context,
                 MaterialPageRoute(builder: (context) => ContactUsPage()),
               );
               break;
-            case 4:
+            case 3:
               Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => EducationalResourcePage()),
               );
               break;
-            case 5:
+            case 4:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ChatBot()),
@@ -346,20 +343,16 @@ class _HomePageState extends State<HomePage> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_box_outlined),
-            label: 'About Us',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.info),
             label: 'Support',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.phone),
             label: 'Contact Us',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),

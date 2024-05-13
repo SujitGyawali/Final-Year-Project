@@ -2,7 +2,6 @@ import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:farmi_culture/home.dart';
 import 'package:farmi_culture/support.dart';
 import 'package:flutter/material.dart';
-import 'aboutus.dart';
 import 'contactus.dart';
 import 'education.dart';
 import 'messages.dart';
@@ -86,12 +85,6 @@ class _ChatBotState extends State<ChatBot> {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AboutUsPage()),
-              );
-              break;
-            case 1:
-              Navigator.push(
-                context,
                 MaterialPageRoute(builder: (context) => SupportPage()),
               );
               break;
@@ -101,20 +94,20 @@ class _ChatBotState extends State<ChatBot> {
                 MaterialPageRoute(builder: (context) => HomePage()),
               );
               break;
-            case 3:
+            case 1:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ContactUsPage()),
               );
               break;
-            case 4:
+            case 3:
               Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => EducationalResourcePage()),
               );
               break;
-            case 5:
+            case 4:
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -125,20 +118,16 @@ class _ChatBotState extends State<ChatBot> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_box_outlined),
-            label: 'About Us',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.info),
             label: 'Support',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.phone),
             label: 'Contact Us',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),

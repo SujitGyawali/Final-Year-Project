@@ -3,7 +3,6 @@ import 'package:farmi_culture/contactus.dart';
 import 'package:farmi_culture/home.dart';
 import 'package:flutter/material.dart';
 import 'support.dart'; // Import the SupportPage widget from support.dart
-import 'aboutus.dart'; // Import the AboutUsPage widget from aboutus.dart
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class EducationalResourcePage extends StatelessWidget {
@@ -68,28 +67,23 @@ class EducationalResourcePage extends StatelessWidget {
         type: BottomNavigationBarType.fixed, // Ensuring all items are shown
         currentIndex: 0, // Set the current index
         onTap: (index) {
-          if (index == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AboutUsPage()),
-            );
-          } else if (index == 2) {
+           if (index == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
             );
-          }else if (index == 1) {
+          }else if (index == 0) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => SupportPage()),
             );
-          } else if (index == 3) {
+          } else if (index == 1) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ContactUsPage()),
             );
           }
-          else if (index == 5) {
+          else if (index == 4) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ChatBot()),
@@ -99,20 +93,16 @@ class EducationalResourcePage extends StatelessWidget {
         },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_box_outlined),
-            label: 'About Us',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.info),
             label: 'Support',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.phone),
             label: 'Contact Us',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
