@@ -147,7 +147,7 @@ class _ChatBotState extends State<ChatBot> {
       print('Message is empty');
     } else {
       setState(() {
-        addMessage(Message(text: DialogText(text: [text])), true);
+        addMessage(Message(text: DialogText(text: [text],)), true);
       });
 
       DetectIntentResponse response = await dialogFlowtter.detectIntent(
@@ -162,7 +162,7 @@ class _ChatBotState extends State<ChatBot> {
   addMessage(Message message, [bool isUserMessage = false]) {
     messages.add({'message': message,
       'isUserMessage': isUserMessage,
-      'color': isUserMessage ? Colors.black : Colors.green,
+      'color': isUserMessage ? Colors.white : Colors.green,
     });
   }
 }
