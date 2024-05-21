@@ -6,25 +6,24 @@ import 'contactus.dart';
 import 'education.dart';
 import 'messages.dart';
 
+//Chatbot is a statefulwidget which maintains state that may change during widget lifecycle
 class ChatBot extends StatefulWidget {
   const ChatBot({super.key});
-
   @override
   State<ChatBot> createState() => _ChatBotState();
 }
 
 class _ChatBotState extends State<ChatBot> {
-  late DialogFlowtter dialogFlowtter;
-  final TextEditingController _controller = TextEditingController();
-
-  List<Map<String, dynamic>> messages = [];
+  late DialogFlowtter dialogFlowtter;  //instance of DialogFlowtter for interacting with Dialog Flow
+  final TextEditingController _controller = TextEditingController();  //Text editing controller for input field
+  List<Map<String, dynamic>> messages = []; //List of messages between user and chatbot
   @override
+  //Initialize the DialogFlowtter instance from file contaning configuration data
   void initState() {
     DialogFlowtter.fromFile().then((instance)=>dialogFlowtter=instance);
     super.initState();
 
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,6 @@ class _ChatBotState extends State<ChatBot> {
             SizedBox(height: 20),
             Container(
               alignment: Alignment.center,
-
               decoration: BoxDecoration(
                 color: Color(0xFF598C00), // Set the container color
                 borderRadius: BorderRadius.circular(20.0), // Set the border radius
@@ -51,6 +49,8 @@ class _ChatBotState extends State<ChatBot> {
                 ),
               ),
             ),
+
+            //MessagesScreen to display the list of messages exchanged within the chatbot
             Expanded(child: MessagesScreen(messages: messages)),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -58,11 +58,13 @@ class _ChatBotState extends State<ChatBot> {
               child: Row(
                 children: [
                   Expanded(
+                    //Allow user to type the messages
                       child: TextField(
                         controller: _controller,
                         style: TextStyle(color: Colors.black),
                       )),
                   IconButton(
+                    //Allows user to send messages to chatbot
                       onPressed: () {
                         sendMessage(_controller.text);
                         _controller.clear();
@@ -142,23 +144,27 @@ class _ChatBotState extends State<ChatBot> {
     );
   }
 
+ //Sends the user input to Dialogflow and adds both user message and response to the list of messages.
   sendMessage(String text) async {
+    //Checks if the message is not empty.
     if (text.isEmpty) {
       print('Message is empty');
     } else {
       setState(() {
         addMessage(Message(text: DialogText(text: [text],)), true);
       });
-
+      //Sends the message to Dialogflow and awaits the response.
       DetectIntentResponse response = await dialogFlowtter.detectIntent(
           queryInput: QueryInput(text: TextInput(text: text)));
       if (response.message == null) return;
       setState(() {
+        //Adds the response message to the state.
         addMessage(response.message!);
       });
     }
   }
 
+  //Adds a message to the list indicating whether it is a user message and color is assigned accordingly.
   addMessage(Message message, [bool isUserMessage = false]) {
     messages.add({'message': message,
       'isUserMessage': isUserMessage,

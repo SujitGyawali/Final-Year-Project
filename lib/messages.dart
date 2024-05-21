@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 
+//Stateful widget that takes a list of messages as a required parameter.
 class MessagesScreen extends StatefulWidget {
+  //messages is a list of message objects passed to the widget.
   final List messages;
   const MessagesScreen({Key? key, required this.messages}) : super(key: key);
-
   @override
+  //_MessagesScreenState is the state class for MessagesScreen
   _MessagesScreenState createState() => _MessagesScreenState();
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
+    //Retrieves the width of device screen for setting constraints on the message container width.
     var w = MediaQuery.of(context).size.width;
+
+    //Creates a ListView that separates each item with a custom separator.
     return ListView.separated(
+      //itemBuilder defines how each item is built.
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.all(10),
@@ -44,7 +50,9 @@ class _MessagesScreenState extends State<MessagesScreen> {
             ),
           );
         },
+        //separatorBuilder adds a separator:padding of 10 pixels between each item.
         separatorBuilder: (_, i) => Padding(padding: EdgeInsets.only(top: 10)),
+        //itemCount: Specifies the number of items in the list.
         itemCount: widget.messages.length);
   }
 }

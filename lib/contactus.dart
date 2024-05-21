@@ -9,11 +9,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart'; // Import your Firebase configuration if needed
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();   //Ensuring that flutter binding is initialized
+  //Initializes Firebase with specific configuration
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MyApp());
+  runApp(MyApp());  //Runs the app starting with 'MyApp'
 }
 
+//StatelessWidget which contains 'ContactUsPage' as the home page of the app
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//Stateful Widget allowing it to manage from input and state changes
 class ContactUsPage extends StatefulWidget {
   @override
   _ContactUsPageState createState() => _ContactUsPageState();
@@ -30,6 +33,8 @@ class ContactUsPage extends StatefulWidget {
 
 class _ContactUsPageState extends State<ContactUsPage> {
   final _formKey = GlobalKey<FormState>(); // Add a form key for validation
+
+  //Controllers to capture the user input
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _mobileController = TextEditingController();
@@ -70,7 +75,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     children: [
-                      TextFormField(
+                      TextFormField( //used for validation logic of each input fields
                         controller: _nameController,
                         decoration: InputDecoration(
                           labelText: 'Your Name',
@@ -83,7 +88,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                         },
                       ),
                       SizedBox(height: 30.0),
-                      TextFormField(
+                      TextFormField( //used for validation logic of each input fields
                         controller: _emailController,
                         decoration: InputDecoration(
                           labelText: 'Your Email',
@@ -98,7 +103,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                         },
                       ),
                       SizedBox(height: 30.0),
-                      TextFormField(
+                      TextFormField( //used for validation logic of each input fields
                         controller: _mobileController,
                         decoration: InputDecoration(
                           labelText: 'Your Mobile Number',
@@ -114,7 +119,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                         },
                       ),
                       SizedBox(height: 30.0),
-                      TextFormField(
+                      TextFormField( //used for validation logic of each input fields
                         controller: _feedbackController,
                         decoration: InputDecoration(
                           labelText: 'Feedback Message',

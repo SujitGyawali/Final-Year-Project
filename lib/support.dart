@@ -52,7 +52,7 @@ class SupportPage extends StatelessWidget {
                     title: Text('1. First the app lands on the page where the user can click on “Get Started” button.',),
                   ),
                   ListTile(
-                    title: Text('2. If the IoT device is connected main page will open while it will land on the Error Page.'),
+                    title: Text('2. Then the main page will open where the data of the IoT Sensors are shown.'),
                   ),
                   ListTile(
                     title: Text('3. Then the app can be navigated through the bottom bar.'),
@@ -64,7 +64,7 @@ class SupportPage extends StatelessWidget {
                     title: Text('5. There is the Educational Resource page where the user will get the idea about the project, they will be able to see the YouTube Videos for the idea and also get sample articles for the project reference.'),
                   ),
                   ListTile(
-                    title: Text('6. The About Us page is the page where the information about the project listed with the Project initiator Name and Details.'),
+                    title: Text('6. The last page is the Chatbot page where the user can communicate with their queries.'),
                   ),
 
                   // Add more list tiles for additional steps

@@ -12,23 +12,28 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http; // Importing http package
 import 'dart:convert'; // Importing JSON package for encoding/decoding
 
+//HomePage widget is a stateful widget.
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  //Initializes Firebase Database reference and local notification plugin.
   DatabaseReference _databaseRef = FirebaseDatabase.instance.ref();
+  //cropSuggestion is used to store the result of the crop prediction.
   String cropSuggestion = "--";
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
+  //initState method initializes Firebase and local notifications when the widget is created.
   void initState() {
     super.initState();
     _initializeFirebase();
     _initializeNotifications();
   }
 
+  //Sets up local notifications, including requesting permissions and handling notification taps.
   void _initializeNotifications() {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -54,6 +59,7 @@ class _HomePageState extends State<HomePage> {
         ?.requestPermission();
   }
 
+  //Defines a method to send local notifications with the crop prediction result.
   Future<void> _sendNotification(String crop) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails('crop_prediction', 'Crop Prediction',
@@ -78,6 +84,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  //Initializes Firebase with the provided configuration.
   Future<void> _initializeFirebase() async {
     if (Firebase.apps.isEmpty) {
       //Ensuring Firebase initialization
@@ -133,10 +140,10 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // Method to load CSV from assets and update the crop suggestion
+  //Sends the sensor data to an API endpoint for crop prediction and updates the UI with the result.
   Future<void> _loadCSV(
       String temperature, String humidity, String soilMoisture) async {
-    String apiLink = "192.168.1.71:8000";
+    String apiLink = "192.168.1.71:8000";//"";172.22.17.94:8000
     final client = http.Client();
     var result = "";
     try {
@@ -206,6 +213,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 10.0),
+
+              //A StreamBuilder that listens for sensor data changes and updates the UI accordingly.
               StreamBuilder<Map<String, dynamic>>(
                 stream: getSensorDataStream(),
                 builder: (context, snapshot) {
@@ -229,8 +238,11 @@ class _HomePageState extends State<HomePage> {
                                 Color(0xFF598C00)),
                             _buildInfoCard('Soil Moisture',
                                 '${data?['soilMoisture']}', Color(0xFF598C00)),
-                            _buildInfoCard('Water Level',
-                                '${data?['waterLevel']}', Color(0xFF598C00)),
+                            _buildInfoCard(
+                              'Water',
+                              data?['waterLevel'] == true ?  'Detected' : 'Detected',
+                              Color(0xFF598C00),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -367,6 +379,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Utility method to create the UI components of the ButtonCard
   Widget _buildButtonCard(
       String title, String buttonLabel, Color color, VoidCallback onPressed) {
     return Container(
@@ -398,6 +411,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Utility method to create the UI components of the InfoCard
   Widget _buildInfoCard(String title, String value, Color color) {
     return Container(
       decoration: BoxDecoration(

@@ -1,6 +1,7 @@
 import 'package:farmi_culture/home.dart';
 import 'package:flutter/material.dart';
 
+//LandingPage is a stateless widget which does not change its state after it is built.
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class LandingPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RichText(
+            RichText(  //Allows for richly formatted text with different styles.
               textAlign: TextAlign.center,
               text: TextSpan(
                 children: [
@@ -33,6 +34,8 @@ class LandingPage extends StatelessWidget {
                 ],
               ),
             ),
+
+            //Adding vertical space between the widgets.
             SizedBox(height: 10.0),
             Text(
               '"Life grows where seeds are sown"',
@@ -52,8 +55,8 @@ class LandingPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.0), // Add padding to the button
               child: SizedBox(
                 width: double.infinity, // Make the button width match the width of the screen
-                child: InkWell(
-                  onTap: () {
+                child: InkWell(   //Makes the button tappable and provides a ripple effect.
+                  onTap: () {  //Defines the action when the button is tapped. It navigates to the HomePage.
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HomePage()),

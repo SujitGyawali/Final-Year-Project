@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'support.dart'; // Import the SupportPage widget from support.dart
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+//EducationalResourcePage is a stateless widget, meaning its state cannot change after it's built.
 class EducationalResourcePage extends StatelessWidget {
+  //_ytcontrol: Controller for the YouTube player
   YoutubePlayerController _ytcontrol = YoutubePlayerController(
       initialVideoId: 'u3bHn12q-Vw',
       flags: YoutubePlayerFlags(autoPlay: false, mute: true)
   );
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( //Provides the basic structure of the page
       backgroundColor: Color(0xFFE4F8E7), // Set background color to E4F8E7
       body: Padding(
         padding: EdgeInsets.only(top: 60.0), // Add padding at the top
@@ -30,7 +32,7 @@ class EducationalResourcePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40.0),
-              YoutubePlayer(controller: _ytcontrol),
+              YoutubePlayer(controller: _ytcontrol), //Embedded using YoutubePlayer widget with the controller.
               SizedBox(height: 60.0),
               Text(
                 'Articles and Reports',
@@ -41,6 +43,8 @@ class EducationalResourcePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10.0),
+
+              // Dynamically creates a list of articles from the articles list, with onTap handlers for future functionality.
               ListView.builder(
                 shrinkWrap: true, // Add this to prevent the ListView from taking full height
                 itemCount: articles.length,
